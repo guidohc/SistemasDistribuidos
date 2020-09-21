@@ -1,0 +1,119 @@
+
+public class PageRank {
+
+	public static void main(String[] args) {
+
+		int NumberPages = 10;
+		int min = 5, max = 50;
+		int cont = 0;
+		int Value1 = 0;
+		int z = 0;
+		int u=0;
+		double compare=0;
+
+		for (int a = 0; a < 4; a++) {
+			if (a == 0) {
+				NumberPages = 10;
+				max = 10;
+				Value1 = 0;
+				z = (int) ((Math.random() * (max - min + 1) + min));
+			} else if (a == 1) {
+				NumberPages = 100;
+				max = 50;
+				Value1 = 0;
+				z = (int) ((Math.random() * (max - min + 1) + min));
+			} else if (a == 2) {
+				NumberPages = 1000;
+				max = 50;
+				Value1 = 0;
+				z = (int) ((Math.random() * (max - min + 1) + min));
+			} else if (a == 3) {
+				NumberPages = 1000000;
+				max = 50;
+				Value1 = 0;
+				z = (int) ((Math.random() * (max - min + 1) + min));
+			}
+			double PorcentPage[] = new double[NumberPages];
+			int Values[] = new int[NumberPages];
+			//double r[] = new double[NumberPages];
+			double r=0; 
+			double ResultMatrizXr[] = new double[NumberPages];
+
+			for (int b = 0; b < NumberPages; b++) {
+				Values[b] = (int) ((Math.random() * (max - min + 1) + min));
+			}
+
+			double Matrizx[] = new double[NumberPages];
+			for (int c = 0; c < NumberPages; c++) {
+				for (int i = 0; i < NumberPages; i++) {
+					if ((i == c) || (cont == Values[i])) {
+						Matrizx[i] = 0.0;
+					} else {
+						double a1 = (double) (100 / Values[i])/100 ;
+						//Matrizx[c][i] = a1;
+						Matrizx[i]=a1;
+						cont++;
+					}
+					cont = 0;
+				}
+				
+				r = (double) (1000000 / NumberPages)/1000000;// muestra la cantidad de 1 entre el numero de paginas
+				for (int k = 0; k < NumberPages; k++) {
+					//ResultMatrizXr[Value1] = ResultMatrizXr[Value1] + (Matrizx[Value1][k] * r[k]);
+					ResultMatrizXr[Value1] = ResultMatrizXr[Value1] + (Matrizx[k] * r);
+				}
+				PorcentPage[Value1] = ResultMatrizXr[Value1] * 100;///cambio
+				Value1++;
+				compare = PorcentPage[0];
+				for (int e = 0; e < NumberPages; e++) {
+					if ((compare < PorcentPage[e])) {
+						compare = PorcentPage[e];
+						u=e;
+					}
+				}
+			}
+			
+			//se utiliza el algoritmo de PageRank
+			
+			double P[] = new double[NumberPages];
+			double d=0.85;
+			P[Value1] =(double) (1-d)+(d*ResultMatrizXr[Value1]); 
+			
+			/*compare = PorcentPage[0];
+			for (int e = 0; e < NumberPages; e++) {
+				if ((compare < PorcentPage[e])) {
+					compare = PorcentPage[e];
+					u=e;
+				}
+			}*/
+			/*for (int d = 0; d < NumberPages; d++) {
+				for (int k = 0; k < NumberPages; k++) {
+					//ResultMatrizXr[Value1] = ResultMatrizXr[Value1] + (Matrizx[Value1][k] * r[k]);
+				}
+				PorcentPage[Value1] = ResultMatrizXr[Value1] * 100;
+				Value1++;
+			}*/
+		/*	compare = PorcentPage[0];
+			for (int e = 0; e < NumberPages; e++) {
+				if ((compare < PorcentPage[e])) {
+					compare = PorcentPage[e];
+					u=e;
+				}
+			}*/
+			
+			System.out.println("el valor de   mas alto es " + compare + "%" +" y pertence a : " + u);// muestra el valor de cada
+			u=0;																	// matriz
+			Value1 = 0;
+			// }
+			
+			System.out.println("valor de z " + z);
+			System.out.println("valor de a " + a);
+			System.out.println(".....");
+			System.out.println("-----");
+			System.out.println(".....");
+			
+		
+
+		}
+	}
+}
